@@ -1,0 +1,740 @@
+<!doctype html>
+<html lang="uk">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Тести</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --f:'Manrope',system-ui,-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+  --ink:#172033;
+  --ink2:#526071;
+  --ink3:#7B8796;
+  --bg:#F4F7FA;
+  --surf:#FFFFFF;
+  --surf2:#F7FAFC;
+  --bdr:#DFE7EF;
+  --bdr2:#C9D5E1;
+  --blue:#2563EB;--blue-bg:#EAF1FF;--blue-dk:#1D4ED8;--blue-tx:#1E3A8A;
+  --grn:#157347;--grn-bg:#E9F7EF;
+  --red:#B42318;--red-bg:#FEEBE9;
+  --amb:#A16207;--amb-bg:#FFF5D9;
+  --teal:#0F766E;--teal-bg:#E6F7F5;
+  --shadow:0 16px 42px rgba(29,45,68,.10);
+  --shadow-sm:0 8px 22px rgba(29,45,68,.08);
+  --r:8px;--rs:8px;
+}
+html{background:var(--bg)}
+body{
+  font-family:var(--f);color:var(--ink);background:
+    linear-gradient(180deg,#EEF5FF 0,#F8FAFC 280px,var(--bg) 100%);
+  min-height:100vh;font-size:14px;line-height:1.6;
+}
+body:before{
+  content:"";position:fixed;inset:0;pointer-events:none;opacity:.55;
+  background-image:linear-gradient(rgba(37,99,235,.055) 1px,transparent 1px),linear-gradient(90deg,rgba(15,118,110,.045) 1px,transparent 1px);
+  background-size:44px 44px;
+}
+.page{display:none;padding:2rem 1.25rem 3rem;max-width:920px;margin:0 auto;position:relative}
+.page.active{display:block}
+
+.topbar{display:flex;align-items:center;gap:.75rem;margin-bottom:1.5rem;background:rgba(255,255,255,.78);border:1px solid rgba(223,231,239,.9);border-radius:var(--r);padding:.75rem;box-shadow:var(--shadow-sm);backdrop-filter:blur(14px)}
+.logo-mark{width:42px;height:42px;background:#172033;border-radius:var(--r);display:grid;place-items:center;color:#fff;font-size:21px;flex-shrink:0;box-shadow:inset 0 -10px 18px rgba(37,99,235,.35)}
+.logo-name{font-size:19px;font-weight:800}
+.topbar-end{margin-left:auto;display:flex;gap:8px}
+
+.card{background:var(--surf);border:1px solid var(--bdr);border-radius:var(--r);padding:1.25rem 1.375rem;box-shadow:var(--shadow-sm)}
+
+.test-item{display:flex;align-items:center;gap:1rem;padding:1rem 1.1rem;background:rgba(255,255,255,.92);border:1px solid var(--bdr);border-radius:var(--r);margin-bottom:.75rem;box-shadow:0 10px 28px rgba(29,45,68,.06);transition:border-color .2s,transform .15s,box-shadow .2s}
+.test-item:hover{border-color:var(--bdr2);transform:translateY(-2px);box-shadow:var(--shadow-sm)}
+.test-item-icon{width:44px;height:44px;background:var(--blue-bg);border:1px solid #D6E4FF;border-radius:var(--r);display:grid;place-items:center;font-size:21px;color:var(--blue);flex-shrink:0}
+.test-item-body{flex:1;min-width:0}
+.test-item-name{font-size:15px;font-weight:800;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.test-item-meta{display:flex;gap:6px;margin-top:6px;flex-wrap:wrap}
+
+.chip{display:inline-flex;align-items:center;gap:4px;font-size:11px;font-weight:700;padding:4px 8px;border-radius:999px}
+.chip-blue{background:var(--blue-bg);color:var(--blue-tx)}
+.chip-grn{background:var(--grn-bg);color:var(--grn)}
+.chip-red{background:var(--red-bg);color:var(--red)}
+.chip-amb{background:var(--amb-bg);color:var(--amb)}
+.chip-teal{background:var(--teal-bg);color:var(--teal)}
+.chip-gray{background:#EEF2F6;color:var(--ink2)}
+
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:7px;min-height:38px;padding:9px 15px;border-radius:var(--rs);border:1px solid var(--bdr2);background:var(--surf);color:var(--ink);font-size:13px;font-weight:700;cursor:pointer;font-family:var(--f);transition:background .15s,border-color .15s,box-shadow .15s,transform .12s;line-height:1.1;white-space:nowrap}
+.btn:hover{background:var(--surf2);box-shadow:0 6px 14px rgba(29,45,68,.08)}
+.btn:active{transform:scale(.98)}
+.btn-primary{background:var(--blue);color:#fff;border-color:var(--blue)}
+.btn-primary:hover{background:var(--blue-dk);border-color:var(--blue-dk)}
+.btn-sm{min-height:32px;padding:7px 11px;font-size:12px}
+.btn-danger{background:var(--red-bg);color:var(--red);border-color:#FFD1CD}
+.btn-danger:hover{border-color:#F59B93;background:#FFE2DF}
+.btn-full{width:100%;justify-content:center}
+.btn-icon{width:34px;padding:0}
+
+input,textarea,select{width:100%;padding:10px 12px;border-radius:var(--rs);border:1px solid var(--bdr2);background:var(--surf);color:var(--ink);font-family:var(--f);font-size:13px;transition:border-color .2s,box-shadow .2s}
+input:focus,textarea:focus,select:focus{outline:none;border-color:var(--blue);box-shadow:0 0 0 4px rgba(37,99,235,.12)}
+textarea{resize:vertical;min-height:78px}
+label{display:block;font-size:11px;font-weight:800;text-transform:uppercase;color:var(--ink2);margin-bottom:6px}
+.field{margin-bottom:1rem}
+.row{display:flex;gap:12px}
+.row .field{flex:1;margin-bottom:0}
+
+.section-title{font-size:12px;font-weight:800;text-transform:uppercase;color:var(--ink3);margin:.25rem 0 .875rem}
+
+.progress-wrap{margin-bottom:1.5rem;background:rgba(255,255,255,.7);border:1px solid var(--bdr);border-radius:var(--r);padding:.85rem 1rem}
+.progress-track{height:7px;background:#E8EEF5;border-radius:999px;overflow:hidden}
+.progress-fill{height:100%;background:linear-gradient(90deg,var(--blue),var(--teal));border-radius:999px;transition:width .45s cubic-bezier(.4,0,.2,1)}
+.progress-info{display:flex;justify-content:space-between;align-items:center;margin-bottom:.6rem;gap:.75rem}
+.progress-step{font-size:13px;font-weight:800;color:var(--ink2)}
+
+.opt-btn{width:100%;text-align:left;padding:14px 15px;margin-bottom:9px;border-radius:var(--rs);border:1px solid var(--bdr2);background:var(--surf);cursor:pointer;font-family:var(--f);font-size:14px;color:var(--ink);display:flex;align-items:center;gap:12px;transition:all .18s}
+.opt-btn:hover:not([disabled]){border-color:var(--blue);background:var(--blue-bg);transform:translateY(-1px)}
+.opt-btn.sel{border-color:var(--blue);background:var(--blue-bg);color:var(--blue-tx);box-shadow:0 0 0 3px rgba(37,99,235,.10)}
+.opt-btn.ok{border-color:var(--grn);background:var(--grn-bg);color:var(--grn)}
+.opt-btn.bad{border-color:var(--red);background:var(--red-bg);color:var(--red)}
+.opt-key{width:28px;height:28px;border-radius:7px;border:1.5px solid currentColor;display:grid;place-items:center;font-size:11px;font-weight:800;flex-shrink:0}
+
+.fb{padding:13px 15px;border-radius:var(--rs);font-size:13px;font-weight:700;display:flex;align-items:center;gap:10px;margin-top:1rem}
+.fb-ok{background:var(--grn-bg);color:var(--grn);border:1px solid #9FD7B7}
+.fb-bad{background:var(--red-bg);color:var(--red);border:1px solid #F4AAA3}
+.fb i{font-size:18px;flex-shrink:0}
+
+.timer-pill{display:inline-flex;align-items:center;gap:5px;padding:7px 11px;border-radius:999px;background:var(--blue-bg);color:var(--blue-tx);font-size:13px;font-weight:800;font-variant-numeric:tabular-nums}
+.timer-pill.warn{background:var(--amb-bg);color:var(--amb)}
+.timer-pill.danger{background:var(--red-bg);color:var(--red)}
+
+.score-hero{text-align:center;padding:2rem 1rem 1.5rem}
+.score-ring{width:120px;height:120px;margin:0 auto 1rem;position:relative;display:grid;place-items:center}
+.score-ring svg{position:absolute;inset:0;width:100%;height:100%}
+.score-pct{font-size:30px;font-weight:800}
+.score-label{font-size:14px;color:var(--ink2)}
+.score-verdict{display:inline-flex;align-items:center;gap:6px;margin-top:.875rem;padding:7px 18px;border-radius:999px;font-size:13px;font-weight:800}
+
+.res-row{display:flex;align-items:flex-start;gap:12px;padding:13px 0;border-bottom:1px solid var(--bdr)}
+.res-row:last-child{border-bottom:none}
+.res-icon{width:28px;height:28px;border-radius:50%;display:grid;place-items:center;flex-shrink:0;margin-top:1px}
+.res-icon.ok{background:var(--grn-bg);color:var(--grn)}
+.res-icon.bad{background:var(--red-bg);color:var(--red)}
+
+.hist-row{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:11px 0;border-bottom:1px solid var(--bdr)}
+.hist-row:last-child{border-bottom:none}
+
+.q-block{background:var(--surf);border:1px solid var(--bdr);border-radius:var(--r);padding:1rem 1.125rem;margin-bottom:.75rem;box-shadow:0 8px 22px rgba(29,45,68,.05)}
+.q-hdr{display:flex;align-items:center;gap:8px;cursor:pointer}
+.q-num{width:24px;height:24px;border-radius:7px;background:var(--blue-bg);color:var(--blue-tx);font-size:11px;font-weight:800;display:grid;place-items:center;flex-shrink:0}
+.ans-row{display:flex;gap:8px;align-items:center;margin-top:.625rem}
+.ans-row input[type=text]{flex:1}
+.ans-row input[type=checkbox],.ans-row input[type=radio]{flex-shrink:0;width:17px;height:17px;accent-color:var(--blue);cursor:pointer}
+
+.empty{text-align:center;padding:2.5rem 1rem;color:var(--ink3)}
+.empty i{font-size:40px;display:block;margin-bottom:.75rem;opacity:.45}
+.divider{border:none;border-top:1px solid var(--bdr);margin:1.35rem 0}
+
+.login-center{max-width:380px;margin:3rem auto}
+.lock-box{width:58px;height:58px;background:var(--blue-bg);border:1px solid #D6E4FF;border-radius:var(--r);display:grid;place-items:center;font-size:27px;color:var(--blue);margin:0 auto 1.25rem}
+
+.quiz-actions{display:flex;justify-content:flex-end;gap:8px;margin-top:1.25rem;padding-top:1rem;border-top:1px solid var(--bdr)}
+.share-panel{display:none;margin-bottom:1rem}
+.share-panel.active{display:block}
+.share-link-row{display:flex;gap:8px;margin-top:.75rem}
+.share-link-row input{font-size:12px}
+
+@media (max-width:640px){
+  .page{padding:1rem .75rem 2rem}
+  .topbar{align-items:flex-start;flex-wrap:wrap}
+  .topbar-end{width:100%;justify-content:flex-end}
+  .test-item{align-items:flex-start;flex-wrap:wrap}
+  .test-item-body{width:calc(100% - 60px)}
+  .test-item>.btn{margin-left:56px}
+  .row{flex-direction:column;gap:1rem}
+  .row .field{margin-bottom:0}
+  .hist-row{align-items:flex-start;flex-direction:column}
+  .quiz-actions{justify-content:stretch}
+  .quiz-actions .btn{flex:1}
+  .share-link-row{flex-direction:column}
+}
+</style>
+</head>
+<body>
+
+<div id="page-home" class="page active">
+  <div class="topbar">
+    <div class="logo-mark"><i class="ti ti-clipboard-check" aria-hidden="true"></i></div>
+    <span class="logo-name">Тести</span>
+    <div class="topbar-end">
+      <button class="btn btn-sm" onclick="goAdmin()"><i class="ti ti-settings" aria-hidden="true"></i> Адмін</button>
+    </div>
+  </div>
+  <div class="section-title">Доступні тести</div>
+  <div id="home-tests"></div>
+  <div class="divider"></div>
+  <div class="section-title">Останні результати</div>
+  <div class="card" style="padding:.25rem 1.375rem" id="home-hist"></div>
+</div>
+
+<div id="page-quiz" class="page">
+  <div class="topbar">
+    <button class="btn btn-sm" onclick="if(confirm('Вийти?'))showHome()"><i class="ti ti-arrow-left" aria-hidden="true"></i> Вийти</button>
+    <span id="q-title" style="font-weight:700;font-size:15px;flex:1;text-align:center;overflow:hidden;text-overflow:ellipsis;white-space:nowrap"></span>
+    <div id="q-timer" class="timer-pill" style="display:none"><i class="ti ti-clock" aria-hidden="true"></i><span id="timer-val"></span></div>
+  </div>
+  <div class="progress-wrap">
+    <div class="progress-info">
+      <span class="progress-step" id="q-step"></span>
+      <span class="chip chip-blue" id="q-type"></span>
+    </div>
+    <div class="progress-track"><div class="progress-fill" id="q-bar" style="width:0%"></div></div>
+  </div>
+  <div class="card">
+    <div style="font-size:17px;font-weight:700;line-height:1.5;margin-bottom:1.25rem" id="q-text"></div>
+    <div id="q-opts"></div>
+    <div id="q-fb"></div>
+    <div class="quiz-actions">
+      <button class="btn btn-primary" id="btn-confirm" onclick="confirmAnswer()" style="display:none"><i class="ti ti-check" aria-hidden="true"></i> Підтвердити</button>
+      <button class="btn btn-primary" id="btn-next" onclick="nextQuestion()" style="display:none">Далі <i class="ti ti-arrow-right" aria-hidden="true"></i></button>
+    </div>
+  </div>
+</div>
+
+<div id="page-results" class="page">
+  <div class="topbar">
+    <button class="btn btn-sm" onclick="showHome()"><i class="ti ti-home" aria-hidden="true"></i> Головна</button>
+    <span style="font-weight:700;font-size:15px;flex:1;text-align:center">Результати</span>
+    <button class="btn btn-primary btn-sm" onclick="retryTest()"><i class="ti ti-refresh" aria-hidden="true"></i> Ще раз</button>
+  </div>
+  <div class="card" style="margin-bottom:.75rem">
+    <div class="score-hero">
+      <div class="score-ring">
+        <svg viewBox="0 0 110 110" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="55" cy="55" r="48" stroke="var(--surf2)" stroke-width="8"/>
+          <circle id="score-arc" cx="55" cy="55" r="48" stroke="var(--blue)" stroke-width="8" stroke-linecap="round" stroke-dasharray="301.6" stroke-dashoffset="301.6" transform="rotate(-90 55 55)" style="transition:stroke-dashoffset .8s cubic-bezier(.4,0,.2,1)"/>
+        </svg>
+        <span class="score-pct" id="res-pct"></span>
+      </div>
+      <div class="score-label" id="res-sub"></div>
+      <div id="res-verdict"></div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="section-title" style="margin-bottom:1rem">Відповіді</div>
+    <div id="res-details"></div>
+  </div>
+</div>
+
+<div id="page-admin-login" class="page">
+  <div class="login-center">
+    <div class="card">
+      <div class="lock-box"><i class="ti ti-lock" aria-hidden="true"></i></div>
+      <div style="text-align:center;font-size:18px;font-weight:700;margin-bottom:1.5rem">Адмін-панель</div>
+      <div class="field"><label>Пароль</label><input type="password" id="admin-pwd" placeholder="Введіть пароль" onkeydown="if(event.key==='Enter')adminLogin()"></div>
+      <button class="btn btn-primary btn-full" onclick="adminLogin()">Увійти</button>
+      <p id="login-err" style="color:var(--red);font-size:12px;margin-top:.625rem;display:none;text-align:center"><i class="ti ti-alert-circle" aria-hidden="true"></i> Невірний пароль</p>
+      <p style="font-size:12px;color:var(--ink3);text-align:center;margin-top:.75rem">За замовчуванням: <code style="background:var(--surf2);padding:2px 6px;border-radius:5px">admin123</code></p>
+    </div>
+    <div style="text-align:center;margin-top:1rem"><button class="btn btn-sm" onclick="showHome()"><i class="ti ti-arrow-left" aria-hidden="true"></i> Назад</button></div>
+  </div>
+</div>
+
+<div id="page-admin" class="page">
+  <div class="topbar">
+    <button class="btn btn-sm" onclick="showHome()"><i class="ti ti-home" aria-hidden="true"></i> Головна</button>
+    <span style="font-weight:700;font-size:15px;flex:1;text-align:center">Адмін-панель</span>
+    <button class="btn btn-sm" onclick="shareTests()"><i class="ti ti-share" aria-hidden="true"></i> Посилання</button>
+    <button class="btn btn-primary btn-sm" onclick="showCreate()"><i class="ti ti-plus" aria-hidden="true"></i> Новий тест</button>
+  </div>
+  <div class="card share-panel" id="share-panel">
+    <div class="section-title">Посилання для GitHub Pages</div>
+    <div style="font-size:13px;color:var(--ink2)">Надішліть це посилання, щоб інші відкрили сайт одразу з вашими доданими тестами.</div>
+    <div class="share-link-row">
+      <input type="text" id="share-url" readonly>
+      <button class="btn btn-primary btn-sm" onclick="copyShareUrl()"><i class="ti ti-copy" aria-hidden="true"></i> Копіювати</button>
+    </div>
+  </div>
+  <div class="section-title">Всі тести</div>
+  <div id="admin-list"></div>
+</div>
+
+<div id="page-create" class="page">
+  <div class="topbar">
+    <button class="btn btn-sm" onclick="showAdmin()"><i class="ti ti-arrow-left" aria-hidden="true"></i> Назад</button>
+    <span style="font-weight:700;font-size:15px;flex:1;text-align:center" id="create-title">Новий тест</span>
+    <button class="btn btn-primary btn-sm" onclick="saveTest()"><i class="ti ti-check" aria-hidden="true"></i> Зберегти</button>
+  </div>
+  <div class="card" style="margin-bottom:.75rem">
+    <div class="section-title">Налаштування</div>
+    <div class="field"><label>Назва тесту</label><input type="text" id="t-name" placeholder="Наприклад: Фізика — тема 4"></div>
+    <div class="row">
+      <div class="field"><label>Час (хв, 0 = без ліміту)</label><input type="number" id="t-time" value="10" min="0"></div>
+      <div class="field"><label>Перемішати питання</label><select id="t-shuffle"><option value="0">Ні</option><option value="1">Так</option></select></div>
+    </div>
+  </div>
+  <div id="q-container"></div>
+  <button class="btn" style="margin-bottom:1rem" onclick="addQ()"><i class="ti ti-plus" aria-hidden="true"></i> Додати питання</button>
+  <div style="display:flex;justify-content:flex-end">
+    <button class="btn btn-danger btn-sm" id="del-btn" onclick="deleteTest()" style="display:none"><i class="ti ti-trash" aria-hidden="true"></i> Видалити тест</button>
+  </div>
+</div>
+
+<script>
+const LS='quizapp_v3';
+const LS_BACKUP='quizapp_v3_backup';
+const DB_NAME='quizapp_v3_store';
+const DB_STORE='state';
+let S=defaultState();
+let editId=null,quiz=null,tInterval=null,qCount=0;
+
+function defaultState(){return{tests:[],results:[],pwd:'admin123',updatedAt:0};}
+
+function normalizeState(data){
+  const base=defaultState();
+  if(!data||typeof data!=='object')return base;
+  return {
+    tests:Array.isArray(data.tests)?data.tests:[],
+    results:Array.isArray(data.results)?data.results:[],
+    pwd:data.pwd||base.pwd,
+    updatedAt:Number(data.updatedAt)||0
+  };
+}
+
+function chooseState(a,b){
+  if(!a)return b;if(!b)return a;
+  if((b.updatedAt||0)!==(a.updatedAt||0))return (b.updatedAt||0)>(a.updatedAt||0)?b:a;
+  return (b.tests?.length||0)>(a.tests?.length||0)?b:a;
+}
+
+function readLocalState(){
+  let state=null;
+  [LS,LS_BACKUP].forEach(key=>{
+    try{
+      const raw=localStorage.getItem(key);
+      if(raw)state=chooseState(state,normalizeState(JSON.parse(raw)));
+    }catch(e){}
+  });
+  return state;
+}
+
+function writeLocalState(state){
+  const raw=JSON.stringify(state);
+  localStorage.setItem(LS,raw);
+  localStorage.setItem(LS_BACKUP,raw);
+}
+
+function openDb(){
+  return new Promise((resolve,reject)=>{
+    if(!('indexedDB' in window)){reject(new Error('IndexedDB unavailable'));return;}
+    const req=indexedDB.open(DB_NAME,1);
+    req.onupgradeneeded=()=>req.result.createObjectStore(DB_STORE);
+    req.onsuccess=()=>resolve(req.result);
+    req.onerror=()=>reject(req.error);
+  });
+}
+
+async function readDbState(){
+  const db=await openDb();
+  return new Promise(resolve=>{
+    const tx=db.transaction(DB_STORE,'readonly');
+    const req=tx.objectStore(DB_STORE).get(LS);
+    req.onsuccess=()=>resolve(req.result?normalizeState(req.result):null);
+    req.onerror=()=>resolve(null);
+    tx.oncomplete=()=>db.close();
+  });
+}
+
+async function writeDbState(state){
+  try{
+    const db=await openDb();
+    const tx=db.transaction(DB_STORE,'readwrite');
+    tx.objectStore(DB_STORE).put(state,LS);
+    tx.oncomplete=()=>db.close();
+  }catch(e){}
+}
+
+async function load(){
+  const localState=readLocalState();
+  if(localState)S=localState;
+  try{
+    const dbState=await readDbState();
+    S=chooseState(S,dbState)||defaultState();
+  }catch(e){}
+  try{writeLocalState(S);}catch(e){}
+}
+
+function save(){
+  S=normalizeState({...S,updatedAt:Date.now()});
+  try{writeLocalState(S);}catch(e){alert('Не вдалося зберегти тест у браузері. Перевірте, чи не ввімкнений приватний режим або блокування сховища.');}
+  writeDbState(S);
+}
+
+function encodeShareData(data){
+  return btoa(unescape(encodeURIComponent(JSON.stringify(data))));
+}
+
+function decodeShareData(raw){
+  return JSON.parse(decodeURIComponent(escape(atob(raw))));
+}
+
+function getSharePayload(){
+  if(!location.hash)return null;
+  const params=new URLSearchParams(location.hash.slice(1));
+  const raw=params.get('tests');
+  if(!raw)return null;
+  try{
+    const data=decodeShareData(raw);
+    return data&&Array.isArray(data.tests)?data:null;
+  }catch(e){
+    return null;
+  }
+}
+
+function importSharedTests(){
+  const data=getSharePayload();
+  if(!data)return 0;
+  let imported=0;
+  data.tests.forEach(test=>{
+    if(!test||!test.id||!test.name||!Array.isArray(test.questions))return;
+    const i=S.tests.findIndex(x=>x.id===test.id);
+    if(i>=0)S.tests[i]=test;
+    else S.tests.push(test);
+    imported++;
+  });
+  if(imported)save();
+  return imported;
+}
+
+function shareTests(){
+  if(!S.tests.length){alert('Спочатку додайте хоча б один тест.');return;}
+  const payload={v:1,tests:S.tests};
+  const base=location.href.split('#')[0];
+  const url=base+'#tests='+encodeURIComponent(encodeShareData(payload));
+  const panel=document.getElementById('share-panel');
+  const input=document.getElementById('share-url');
+  input.value=url;
+  panel.classList.add('active');
+  input.focus();
+  input.select();
+}
+
+async function copyShareUrl(){
+  const input=document.getElementById('share-url');
+  if(!input.value)shareTests();
+  try{
+    await navigator.clipboard.writeText(input.value);
+    alert('Посилання скопійовано.');
+  }catch(e){
+    input.focus();
+    input.select();
+    alert('Скопіюйте посилання з поля вручну.');
+  }
+}
+
+function showPage(id){document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));document.getElementById('page-'+id).classList.add('active');}
+
+function showHome(){stopTimer();renderHome();showPage('home');}
+
+function renderHome(){
+  const el=document.getElementById('home-tests');
+  if(!S.tests.length){
+    el.innerHTML='<div class="empty"><i class="ti ti-clipboard" aria-hidden="true"></i>Немає тестів. Додайте їх в адмін-панелі.</div>';
+  }else{
+    el.innerHTML=S.tests.map(t=>`
+      <div class="test-item">
+        <div class="test-item-icon"><i class="ti ti-file-description" aria-hidden="true"></i></div>
+        <div class="test-item-body">
+          <div class="test-item-name">${esc(t.name)}</div>
+          <div class="test-item-meta">
+            <span class="chip chip-blue"><i class="ti ti-list-numbers" style="font-size:10px" aria-hidden="true"></i>${t.questions.length} питань</span>
+            ${t.time>0?`<span class="chip chip-gray"><i class="ti ti-clock" style="font-size:10px" aria-hidden="true"></i>${t.time} хв</span>`:`<span class="chip chip-teal">без ліміту</span>`}
+          </div>
+        </div>
+        <button class="btn btn-primary btn-sm" onclick="startTest('${t.id}')"><i class="ti ti-player-play" aria-hidden="true"></i> Почати</button>
+      </div>`).join('');
+  }
+  const h=document.getElementById('home-hist');
+  const rows=[...S.results].reverse().slice(0,8);
+  if(!rows.length){
+    h.innerHTML='<div class="empty" style="padding:1.5rem"><i class="ti ti-chart-bar" aria-hidden="true"></i>Результатів ще немає</div>';
+  }else{
+    h.innerHTML=rows.map(r=>{
+      const p=Math.round(r.score/r.total*100);
+      const cls=p>=80?'chip-grn':p>=50?'chip-amb':'chip-red';
+      return `<div class="hist-row">
+        <div>
+          <div style="font-weight:600;font-size:14px">${esc(r.testName)}</div>
+          <div style="font-size:12px;color:var(--ink3);margin-top:2px">${new Date(r.date).toLocaleString('uk-UA',{dateStyle:'short',timeStyle:'short'})}</div>
+        </div>
+        <span class="chip ${cls}">${r.score}/${r.total} · ${p}%</span>
+      </div>`;
+    }).join('');
+  }
+}
+
+function goAdmin(){showPage('admin-login');}
+
+function adminLogin(){
+  const p=document.getElementById('admin-pwd').value;
+  const e=document.getElementById('login-err');
+  if(p===(S.pwd||'admin123')){e.style.display='none';document.getElementById('admin-pwd').value='';showAdmin();}
+  else e.style.display='block';
+}
+
+function showAdmin(){renderAdminList();showPage('admin');}
+
+function renderAdminList(){
+  const c=document.getElementById('admin-list');
+  if(!S.tests.length){c.innerHTML='<div class="empty"><i class="ti ti-clipboard" aria-hidden="true"></i>Немає тестів</div>';return;}
+  c.innerHTML=S.tests.map(t=>`
+    <div class="test-item">
+      <div class="test-item-icon"><i class="ti ti-file-description" aria-hidden="true"></i></div>
+      <div class="test-item-body">
+        <div class="test-item-name">${esc(t.name)}</div>
+        <div class="test-item-meta">
+          <span class="chip chip-blue">${t.questions.length} питань</span>
+          ${t.time>0?`<span class="chip chip-gray">${t.time} хв</span>`:`<span class="chip chip-teal">без ліміту</span>`}
+        </div>
+      </div>
+      <button class="btn btn-sm" onclick="editTest('${t.id}')"><i class="ti ti-edit" aria-hidden="true"></i> Редагувати</button>
+    </div>`).join('');
+}
+
+function showCreate(){
+  editId=null;qCount=0;
+  document.getElementById('t-name').value='';
+  document.getElementById('t-time').value=10;
+  document.getElementById('t-shuffle').value=0;
+  document.getElementById('q-container').innerHTML='';
+  document.getElementById('create-title').textContent='Новий тест';
+  document.getElementById('del-btn').style.display='none';
+  showPage('create');
+}
+
+function editTest(id){
+  const t=S.tests.find(x=>x.id===id);if(!t)return;
+  editId=id;qCount=0;
+  document.getElementById('t-name').value=t.name;
+  document.getElementById('t-time').value=t.time;
+  document.getElementById('t-shuffle').value=t.shuffle?1:0;
+  document.getElementById('q-container').innerHTML='';
+  document.getElementById('create-title').textContent='Редагування';
+  document.getElementById('del-btn').style.display='inline-flex';
+  t.questions.forEach(q=>addQ(q));
+  showPage('create');
+}
+
+function addQ(ex){
+  qCount++;
+  const id='q'+qCount;
+  const type=ex?ex.type:'single';
+  const text=ex?ex.text:'';
+  const opts=ex?ex.options:[{text:'',correct:true},{text:'',correct:false}];
+  const d=document.createElement('div');
+  d.className='q-block';d.id='qb-'+id;
+  d.innerHTML=`
+    <div class="q-hdr" onclick="toggleQ('${id}')">
+      <span class="q-num">${qCount}</span>
+      <span style="font-weight:600;font-size:13px;flex:1">Питання ${qCount}</span>
+      <div style="display:flex;gap:6px" onclick="event.stopPropagation()">
+        <select id="${id}-type" style="width:auto;font-size:12px;padding:4px 8px" onchange="changeType('${id}')">
+          <option value="single"${type==='single'?' selected':''}>Одна відповідь</option>
+          <option value="multi"${type==='multi'?' selected':''}>Декілька</option>
+        </select>
+        <button class="btn btn-sm btn-danger btn-icon" onclick="removeQ('${id}');event.stopPropagation()"><i class="ti ti-trash" aria-hidden="true"></i></button>
+      </div>
+    </div>
+    <div id="${id}-body" style="margin-top:.75rem">
+      <textarea id="${id}-txt" placeholder="Текст питання...">${esc(text)}</textarea>
+      <div id="${id}-opts">${opts.map((o,i)=>ansRow(id,i,o.text,o.correct,type)).join('')}</div>
+      <button class="btn btn-sm" style="margin-top:6px" onclick="addOpt('${id}')"><i class="ti ti-plus" aria-hidden="true"></i> Варіант</button>
+    </div>`;
+  document.getElementById('q-container').appendChild(d);
+}
+
+function ansRow(qid,i,txt,ok,type){
+  const t=type==='multi'?'checkbox':'radio';
+  return `<div class="ans-row" id="${qid}-opt-${i}">
+    <input type="${t}" name="${qid}-c" id="${qid}-c-${i}" ${ok?'checked':''} onchange="if('${type}'==='single')unchk('${qid}',${i})">
+    <input type="text" placeholder="Варіант ${i+1}" value="${esc(txt)}" id="${qid}-t-${i}" style="flex:1">
+    <button class="btn btn-sm btn-icon" style="padding:6px" onclick="removeOpt('${qid}',${i})"><i class="ti ti-x" aria-hidden="true"></i></button>
+  </div>`;
+}
+
+function unchk(qid,keep){document.getElementById(qid+'-opts').querySelectorAll('input[type=radio]').forEach((r,i)=>r.checked=i===keep);}
+function changeType(qid){const type=document.getElementById(qid+'-type').value;document.getElementById(qid+'-opts').querySelectorAll('input[type=checkbox],input[type=radio]').forEach(inp=>{inp.type=type==='multi'?'checkbox':'radio';inp.name=qid+'-c';});}
+function addOpt(qid){const c=document.getElementById(qid+'-opts');const n=c.querySelectorAll('.ans-row').length;const type=document.getElementById(qid+'-type').value;const d=document.createElement('div');d.innerHTML=ansRow(qid,n,'',false,type);c.appendChild(d.firstChild);}
+function removeOpt(qid,i){const el=document.getElementById(qid+'-opt-'+i);if(el)el.remove();}
+function removeQ(id){const el=document.getElementById('qb-'+id);if(el)el.remove();}
+function toggleQ(id){const b=document.getElementById(id+'-body');b.style.display=b.style.display==='none'?'':'none';}
+
+function collectQs(){
+  const qs=[];
+  document.getElementById('q-container').querySelectorAll('.q-block').forEach(c=>{
+    const id=c.id.replace('qb-','');
+    const type=document.getElementById(id+'-type').value;
+    const text=document.getElementById(id+'-txt').value.trim();
+    if(!text)return;
+    const opts=[];
+    c.querySelectorAll('.ans-row').forEach(row=>{
+      const inp=row.querySelector('input[type=text]');
+      const chk=row.querySelector('input[type=checkbox],input[type=radio]');
+      if(inp&&inp.value.trim())opts.push({text:inp.value.trim(),correct:chk?chk.checked:false});
+    });
+    if(opts.length)qs.push({id:uid(),type,text,options:opts});
+  });
+  return qs;
+}
+
+function saveTest(){
+  const name=document.getElementById('t-name').value.trim();
+  if(!name){alert('Введіть назву тесту');return;}
+  const qs=collectQs();
+  if(!qs.length){alert('Додайте хоча б одне питання');return;}
+  const t={id:editId||uid(),name,time:parseInt(document.getElementById('t-time').value)||0,shuffle:document.getElementById('t-shuffle').value==='1',questions:qs};
+  if(editId){const i=S.tests.findIndex(x=>x.id===editId);if(i>=0)S.tests[i]=t;}
+  else S.tests.push(t);
+  save();showAdmin();
+}
+
+function deleteTest(){
+  if(!editId||!confirm('Видалити тест?'))return;
+  S.tests=S.tests.filter(x=>x.id!==editId);
+  save();showAdmin();
+}
+
+function startTest(id){
+  const test=S.tests.find(t=>t.id===id);if(!test)return;
+  let qs=[...test.questions];
+  if(test.shuffle)qs=shuffle(qs);
+  quiz={test,questions:qs,idx:0,answers:[],timeLeft:test.time>0?test.time*60:null,selected:[],confirmed:false};
+  renderQ();showPage('quiz');startTimer();
+}
+
+function startTimer(){
+  stopTimer();
+  const el=document.getElementById('q-timer');
+  if(!quiz||quiz.timeLeft===null){el.style.display='none';return;}
+  el.style.display='inline-flex';
+  updTimer();
+  tInterval=setInterval(()=>{quiz.timeLeft--;updTimer();if(quiz.timeLeft<=0){stopTimer();finishTest();}},1000);
+}
+function stopTimer(){if(tInterval){clearInterval(tInterval);tInterval=null;}}
+function updTimer(){
+  const el=document.getElementById('q-timer');
+  const v=document.getElementById('timer-val');
+  if(!quiz||quiz.timeLeft===null){el.style.display='none';return;}
+  const m=Math.floor(quiz.timeLeft/60);const s=quiz.timeLeft%60;
+  v.textContent=`${m}:${s<10?'0':''}${s}`;
+  el.className='timer-pill'+(quiz.timeLeft<=30?' danger':quiz.timeLeft<=60?' warn':'');
+}
+
+function renderQ(){
+  const q=quiz.questions[quiz.idx];const tot=quiz.questions.length;
+  document.getElementById('q-title').textContent=quiz.test.name;
+  document.getElementById('q-step').textContent=`${quiz.idx+1} / ${tot}`;
+  document.getElementById('q-type').textContent=q.type==='multi'?'Декілька відповідей':'Одна відповідь';
+  document.getElementById('q-text').textContent=q.text;
+  document.getElementById('q-bar').style.width=(quiz.idx/tot*100)+'%';
+  const letters='ABCDEFGHIJ';
+  document.getElementById('q-opts').innerHTML=q.options.map((o,i)=>`
+    <button class="opt-btn" id="o-${i}" onclick="selOpt(${i})">
+      <span class="opt-key">${letters[i]}</span>
+      <span>${esc(o.text)}</span>
+    </button>`).join('');
+  document.getElementById('q-fb').innerHTML='';
+  document.getElementById('btn-confirm').style.display='none';
+  document.getElementById('btn-next').style.display='none';
+  quiz.selected=[];quiz.confirmed=false;
+}
+
+function selOpt(i){
+  if(quiz.confirmed)return;
+  const q=quiz.questions[quiz.idx];
+  if(q.type==='single'){
+    quiz.selected=[i];
+    document.querySelectorAll('.opt-btn').forEach((b,j)=>b.classList.toggle('sel',j===i));
+  }else{
+    const idx=quiz.selected.indexOf(i);
+    if(idx>=0)quiz.selected.splice(idx,1);else quiz.selected.push(i);
+    document.querySelectorAll('.opt-btn').forEach((b,j)=>b.classList.toggle('sel',quiz.selected.includes(j)));
+  }
+  document.getElementById('btn-confirm').style.display=quiz.selected.length?'inline-flex':'none';
+}
+
+function confirmAnswer(){
+  const q=quiz.questions[quiz.idx];
+  const ci=q.options.map((o,i)=>o.correct?i:-1).filter(i=>i>=0);
+  const sel=quiz.selected;
+  const ok=ci.length===sel.length&&ci.every(i=>sel.includes(i));
+  quiz.confirmed=true;
+  quiz.answers.push({questionIdx:quiz.idx,selected:sel,correct:ok});
+  document.querySelectorAll('.opt-btn').forEach((b,i)=>{
+    b.disabled=true;b.classList.remove('sel');
+    if(ci.includes(i))b.classList.add('ok');
+    else if(sel.includes(i))b.classList.add('bad');
+  });
+  document.getElementById('q-fb').innerHTML=`<div class="fb ${ok?'fb-ok':'fb-bad'}">
+    <i class="ti ${ok?'ti-circle-check':'ti-circle-x'}" aria-hidden="true"></i>
+    <span>${ok?'Правильно!':`Неправильно — правильна відповідь: ${ci.map(i=>`<b>${esc(q.options[i].text)}</b>`).join(', ')}`}</span>
+  </div>`;
+  document.getElementById('btn-confirm').style.display='none';
+  const isLast=quiz.idx>=quiz.questions.length-1;
+  const nb=document.getElementById('btn-next');
+  nb.innerHTML=isLast?'Завершити <i class="ti ti-flag" aria-hidden="true"></i>':'Далі <i class="ti ti-arrow-right" aria-hidden="true"></i>';
+  nb.style.display='inline-flex';
+}
+
+function nextQuestion(){
+  quiz.idx++;
+  if(quiz.idx>=quiz.questions.length){finishTest();return;}
+  renderQ();
+}
+
+function finishTest(){
+  stopTimer();
+  const correct=quiz.answers.filter(a=>a.correct).length;
+  const total=quiz.questions.length;
+  const r={id:uid(),testId:quiz.test.id,testName:quiz.test.name,score:correct,total,date:Date.now(),
+    answers:quiz.answers.map(a=>({question:quiz.questions[a.questionIdx].text,selected:a.selected.map(s=>quiz.questions[a.questionIdx].options[s].text),correct:a.correct,correctOptions:quiz.questions[a.questionIdx].options.filter(o=>o.correct).map(o=>o.text)}))};
+  S.results.push(r);
+  if(S.results.length>50)S.results=S.results.slice(-50);
+  save();showResults(r);
+}
+
+function showResults(r){
+  const pct=Math.round(r.score/r.total*100);
+  document.getElementById('res-pct').textContent=pct+'%';
+  document.getElementById('res-sub').textContent=`${r.score} з ${r.total} правильних`;
+  const circ=301.6;
+  setTimeout(()=>{document.getElementById('score-arc').style.strokeDashoffset=circ-(circ*pct/100);},100);
+  const [vTxt,vCls]=pct>=80?['Відмінно','chip-grn']:pct>=50?['Непогано','chip-amb']:['Спробуй ще раз','chip-red'];
+  document.getElementById('res-verdict').innerHTML=`<span class="chip ${vCls}" style="font-size:13px;padding:7px 18px;margin-top:.875rem">${vTxt}</span>`;
+  document.getElementById('res-details').innerHTML=r.answers.map((a,i)=>`
+    <div class="res-row">
+      <div class="res-icon ${a.correct?'ok':'bad'}"><i class="ti ${a.correct?'ti-check':'ti-x'}" style="font-size:13px" aria-hidden="true"></i></div>
+      <div style="flex:1">
+        <div style="font-size:14px;font-weight:500">${i+1}. ${esc(a.question)}</div>
+        <div style="font-size:12px;color:var(--ink2);margin-top:2px">Відповідь: ${a.selected.map(s=>esc(s)).join(', ')||'—'}</div>
+        ${!a.correct?`<div style="font-size:12px;color:var(--teal);margin-top:2px"><i class="ti ti-check" style="font-size:11px" aria-hidden="true"></i> Правильно: ${a.correctOptions.map(s=>esc(s)).join(', ')}</div>`:''}
+      </div>
+    </div>`).join('');
+  showPage('results');
+}
+
+function retryTest(){startTest(quiz.test.id);}
+function uid(){return Date.now().toString(36)+Math.random().toString(36).slice(2,6);}
+function esc(s){return s?String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'):''}
+function shuffle(a){const b=[...a];for(let i=b.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[b[i],b[j]]=[b[j],b[i]];}return b;}
+
+async function initApp(){
+  await load();
+  importSharedTests();
+  renderHome();
+}
+
+initApp();
+</script>
+</body>
+</html>
